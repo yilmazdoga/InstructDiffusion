@@ -87,13 +87,13 @@ data:
         target: dataset.low_level.lowlevel_perceptual.PerceptualDataset
         params:
           path: data/perceptual_dataset
-          image_set: train
+          split: train
      
     validation:
       target: dataset.low_level.lowlevel_perceptual.PerceptualDataset
       params:
         path: data/perceptual_dataset
-        image_set: test
+        split: test
 
 trainer:
   initial_scale: 13
