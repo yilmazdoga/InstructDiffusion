@@ -4,6 +4,8 @@
 # Removed Pytorch-lightning and supported deepspeed by Zigang Geng (zigang@mail.ustc.edu.cn)
 # --------------------------------------------------------
 
+import os
+os.environ['TORCH_CUDA_ARCH_LIST'] = '9.0'
 import argparse, os, sys, datetime, glob
 import numpy as np
 import time
