@@ -79,173 +79,21 @@ model:
 data:
   target: main.DataModuleFromConfig
   params:
-    batch_size: 64
-    num_workers: 4
+    batch_size: 4
+    num_workers: 1
     train:
 
       - ds1:
-        target: dataset.pose.pose.MPIIDataset
+        target: dataset.low_level.lowlevel_perceptual.PerceptualDataset
         params:
-          root: data/mpii/
+          root: data/perceptual_dataset
           image_set: train
-          is_train: True
-          max_prompt_num: 5
-          min_prompt_num: 1
-          radius: 10
-      - ds2:
-        target: dataset.pose.pose.COCODataset
-        params:
-          root: data/coco/
-          image_set: train2017
-          is_train: True
-          max_prompt_num: 5
-          min_prompt_num: 1
-          radius: 10
-      - ds3:
-        target: dataset.pose.pose.CrowdPoseDataset
-        params:
-          root: data/crowdpose/
-          image_set: train
-          is_train: True
-          max_prompt_num: 5
-          min_prompt_num: 1
-          radius: 10
-      - ds4:
-        target: dataset.pose.pose.AICDataset
-        params:
-          root: data/aic/
-          image_set: train
-          is_train: True
-          max_prompt_num: 5
-          min_prompt_num: 1
-          radius: 10
-          sample_weight: 0.1
-
-      - ds5:
-        target: dataset.seg.coco_stuff.COCOStuffDataset
-        params:
-          path: data/coco-stuff
-          split: train2017
-          crop_res: 256
-          flip_prob: 0.5
-          transparency: 0.5
-          empty_percentage: 0.2
-      - ds6:
-        target: dataset.seg.grefcoco_segmentation.GrefCOCODataset
-        params:
-          path: data/coco_2014
-          split: train
-          min_resize_res: 256
-          max_resize_res: 256
-          crop_res: 256
-          flip_prob: 0.0
-          transparency: 0.5
-      - ds7:
-        target: dataset.seg.refcoco_segmentation.RefCOCODataset
-        params:
-          path: data/coco_2014
-          split: train
-          crop_res: 256
-          flip_prob: 0.0
-          transparency: 0.5
-
-      - ds8:
-        target: dataset.low_level.lowlevel_gopro.GoPro
-        params:
-          path: data/GoPro
-          split: train
-          size: 256
-          flip_prob: 0.5
-          interpolation: pil_lanczos
-          sample_weight: 2.0
-      - ds9:
-        target: dataset.low_level.lowlevel_reds.REDS
-        params:
-          path: data/REDS
-          split: train
-          size: 256
-          flip_prob: 0.5
-          interpolation: pil_lanczos
-          sample_weight: 0.2
-      - ds10:
-        target: dataset.low_level.lowlevel_sidd.SIDD
-        params:
-          path: data/SIDD
-          split: train
-          size: 256
-          flip_prob: 0.5
-          interpolation: pil_lanczos
-          sample_weight: 20
-      - ds11:
-        target: dataset.low_level.lowlevel_clwd.CLWD
-        params:
-          path: data/CLWD
-          split: train
-          size: 256
-          flip_prob: 0.5
-          interpolation: pil_lanczos
-          sample_weight: 0.2
-
-      - ds12:
-        target: dataset.editing.edit_zip_dataset.FilteredIP2PDataset
-        params:
-          path: data/clip-filtered-dataset
-          split: train
-          min_resize_res: 256
-          max_resize_res: 256
-          crop_res: 256
-          flip_prob: 0.5
-          sample_weight: 0.2
-      - ds13:
-        target: dataset.editing.edit_zip_dataset.GIERDataset
-        params:
-          path: data/GIER_editing_data/
-          split: train
-          min_resize_res: 256
-          max_resize_res: 256
-          crop_res: 256
-          flip_prob: 0.0
-          zip_start_index: 0
-          zip_end_index: 100
-          sample_weight: 2.0
-      - ds14:
-        target: dataset.editing.edit_zip_dataset.GQAInpaintDataset
-        params:
-          path: data/gqa-inpaint
-          min_resize_res: 256
-          max_resize_res: 256
-          crop_res: 256
-          flip_prob: 0.0
-      - ds15:
-        target: dataset.editing.edit_zip_dataset.MagicBrushDataset
-        params:
-          path: data/MagicBrush/
-          split: train
-          min_resize_res: 256
-          max_resize_res: 256
-          crop_res: 256
-          flip_prob: 0.5
-          zip_start_index: 0
-          zip_end_index: 100
-      - ds16:
-        target: dataset.editing.edit_zip_dataset.IEIWDataset
-        params:
-          path: data/ieiw/
-          split: train
-          min_resize_res: 256
-          max_resize_res: 256
-          crop_res: 256
-          flip_prob: 0.5
-
+     
     validation:
-      target: dataset.pose.pose.COCODataset
+      target: dataset.low_level.lowlevel_perceptual.PerceptualDataset
       params:
-        root: data/coco/
-        image_set: val2017
-        is_train: False
-        max_prompt_num: 5
-        min_prompt_num: 1
-        radius: 10
+        root: data/perceptual_dataset
+        image_set: test
 
 trainer:
   initial_scale: 13
