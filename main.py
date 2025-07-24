@@ -5,7 +5,7 @@
 # --------------------------------------------------------
 
 import os
-os.environ['TORCH_CUDA_ARCH_LIST'] = '9.0'
+os.environ['TORCH_CUDA_ARCH_LIST'] = "9.0a"
 import argparse, os, sys, datetime, glob
 import numpy as np
 import time
