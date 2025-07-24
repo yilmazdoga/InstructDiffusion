@@ -97,7 +97,7 @@ data:
 
 trainer:
   initial_scale: 13
-  max_epochs: 200
+  max_epochs: 100
   save_freq: 5
   accumulate_grad_batches: 1
   clip_grad: 0.0
