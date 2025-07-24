@@ -75,8 +75,8 @@ class GoPro(Dataset):
         inp_path = self.inp_filenames[index_]
         tar_path = self.tar_filenames[index_]
 
-        inp_img = Image.open(inp_path)
-        tar_img = Image.open(tar_path)
+        inp_img = Image.open(inp_path).convert("RGB")
+        tar_img = Image.open(tar_path).convert("RGB")
 
         width, height = inp_img.size
         tar_width, tar_height = tar_img.size
