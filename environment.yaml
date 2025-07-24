@@ -8,11 +8,11 @@ channels:
 dependencies:
   - python=3.8.5
   - pip=20.3
-  - cudatoolkit=11.3
-  - pytorch=1.11.0
-  - torchvision=0.12.0
   - numpy=1.19.2
   - pip:
+    - torch==2.1.0+cu121
+    - torchvision==0.16.0+cu121
+    - --extra-index-url=https://download.pytorch.org/whl/cu121
     - albumentations==0.4.3
     - datasets==2.8.0
     - diffusers
@@ -30,6 +30,7 @@ dependencies:
     - transformers==4.19.2
     - torchmetrics==0.6.0
     - kornia==0.6
+    - termcolor==2.4.0
     - -e git+https://github.com/CompVis/taming-transformers.git@master#egg=taming-transformers
     - -e git+https://github.com/openai/CLIP.git@main#egg=clip
     - openai
