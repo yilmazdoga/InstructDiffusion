@@ -27,7 +27,7 @@ import torch.backends.cudnn as cudnn
 from torch.utils.data import DataLoader, Dataset, ConcatDataset
 sys.path.append("./stable_diffusion")
 
-from ldm.data.base import Txt2ImgIterableBaseDataset
+# from ldm.data.base import Txt2ImgIterableBaseDataset
 from ldm.util import instantiate_from_config
 from ldm.modules.ema import LitEma
 from utils.logger import create_logger
@@ -209,10 +209,12 @@ class DataModuleFromConfig():
                 self.datasets[k] = WrappedDataset(self.datasets[k])
 
     def _train_concat_dataloader(self):
-        is_iterable_dataset = isinstance(self.datasets['ds1'], Txt2ImgIterableBaseDataset)
+        # is_iterable_dataset = isinstance(self.datasets['ds1'], Txt2ImgIterableBaseDataset)
+        is_iterable_dataset = False  # Placeholder, replace with actual check if needed
 
         if is_iterable_dataset or self.use_worker_init_fn:
-            init_fn = worker_init_fn
+            # init_fn = worker_init_fn
+            init_fn = None
         else:
             init_fn = None
 
@@ -228,9 +230,12 @@ class DataModuleFromConfig():
                           num_workers=self.num_workers, worker_init_fn=init_fn, persistent_workers=True)
 
     def _train_dataloader(self):
-        is_iterable_dataset = isinstance(self.datasets['train'], Txt2ImgIterableBaseDataset)
+        # is_iterable_dataset = isinstance(self.datasets['train'], Txt2ImgIterableBaseDataset)
+        is_iterable_dataset = False  # Placeholder, replace with actual check if needed
+
         if is_iterable_dataset or self.use_worker_init_fn:
-            init_fn = worker_init_fn
+            # init_fn = worker_init_fn
+            init_fn = None
         else:
             init_fn = None
 
@@ -241,10 +246,11 @@ class DataModuleFromConfig():
                           num_workers=self.num_workers, worker_init_fn=init_fn, persistent_workers=True)
 
     def _val_dataloader(self, shuffle=False):
-        if isinstance(self.datasets['validation'], Txt2ImgIterableBaseDataset) or self.use_worker_init_fn:
-            init_fn = worker_init_fn
-        else:
-            init_fn = None
+        # if isinstance(self.datasets['validation'], Txt2ImgIterableBaseDataset) or self.use_worker_init_fn:
+        #     init_fn = worker_init_fn
+        # else:
+        #     init_fn = None
+        init_fn = None
         return DataLoader(self.datasets["validation"],
                           batch_size=self.batch_size,
                           num_workers=self.num_workers,
@@ -252,12 +258,14 @@ class DataModuleFromConfig():
                           shuffle=shuffle, persistent_workers=True)
 
     def _test_dataloader(self, shuffle=False):
-        is_iterable_dataset = isinstance(self.datasets['train'], Txt2ImgIterableBaseDataset)
-        if is_iterable_dataset or self.use_worker_init_fn:
-            init_fn = worker_init_fn
-        else:
-            init_fn = None
-
+        # is_iterable_dataset = isinstance(self.datasets['train'], Txt2ImgIterableBaseDataset)
+        # if is_iterable_dataset or self.use_worker_init_fn:
+        #     init_fn = worker_init_fn
+        # else:
+        #     init_fn = None
+        
+        init_fn = None
+        is_iterable_dataset = False  # Placeholder, replace with actual check if needed
         # do not shuffle dataloader for iterable dataset
         shuffle = shuffle and (not is_iterable_dataset)
 
@@ -265,10 +273,11 @@ class DataModuleFromConfig():
                           num_workers=self.num_workers, worker_init_fn=init_fn, shuffle=shuffle, persistent_workers=True)
 
     def _predict_dataloader(self, shuffle=False):
-        if isinstance(self.datasets['predict'], Txt2ImgIterableBaseDataset) or self.use_worker_init_fn:
-            init_fn = worker_init_fn
-        else:
-            init_fn = None
+        # if isinstance(self.datasets['predict'], Txt2ImgIterableBaseDataset) or self.use_worker_init_fn:
+        #     init_fn = worker_init_fn
+        # else:
+        #     init_fn = None
+        init_fn = None
         return DataLoader(self.datasets["predict"], batch_size=self.batch_size,
                           num_workers=self.num_workers, worker_init_fn=init_fn, persistent_workers=True)
 
