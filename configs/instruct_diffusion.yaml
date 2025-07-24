@@ -86,13 +86,13 @@ data:
       - ds1:
         target: dataset.low_level.lowlevel_perceptual.PerceptualDataset
         params:
-          root: data/perceptual_dataset
+          path: data/perceptual_dataset
           image_set: train
      
     validation:
       target: dataset.low_level.lowlevel_perceptual.PerceptualDataset
       params:
-        root: data/perceptual_dataset
+        path: data/perceptual_dataset
         image_set: test
 
 trainer:
