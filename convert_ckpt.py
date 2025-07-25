@@ -19,9 +19,9 @@ from stable_diffusion.ldm.util import instantiate_from_config
 if __name__ == "__main__":
     parser = ArgumentParser()
     parser.add_argument("--config", default="configs/instruct_diffusion.yaml", type=str)
-    parser.add_argument("--ema-ckpt", default="logs/instruct_diffusion/checkpoints/ckpt_epoch_200/state.pth", type=str)
-    parser.add_argument("--vae-ckpt", default="stable_diffusion/models/ldm/stable-diffusion-v1/v1-5-pruned-emaonly.ckpt", type=str)
-    parser.add_argument("--out-ckpt", default="checkpoints/v1-5-pruned-emaonly-adaption-task.ckpt", type=str)
+    parser.add_argument("--ema-ckpt", default="logs/instruct_diffusion_perceptual_v0/instruct_diffusion_v0/checkpoints/ckpt_epoch_55/state.pth", type=str)
+    parser.add_argument("--vae-ckpt", default="checkpoints/v1-5-pruned-emaonly-adaption-task.ckpt", type=str)
+    parser.add_argument("--out-ckpt", default="checkpoints/v1-5-perceptual-adaption-task.ckpt", type=str)
 
     args = parser.parse_args()
     config = OmegaConf.load(args.config)

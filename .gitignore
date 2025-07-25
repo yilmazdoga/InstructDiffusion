@@ -180,3 +180,4 @@ cython_debug/
 #.idea/
 inference_submit_sing_grefcoco.yaml
 .vscode/
+out_of_dataset_ims/*
