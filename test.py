@@ -431,6 +431,15 @@ class ModelEvaluator:
                     input_image, prompt, steps=steps, seed=seed + i
                 )
                 
+                # visualize images
+                # Create concatenated visualization: input | predicted | target
+                width, height = input_image.size
+                concat_image = Image.new('RGB', (width * 3, height))
+                concat_image.paste(input_image, (0, 0))
+                concat_image.paste(pred_image, (width, 0))
+                concat_image.paste(target_image, (width * 2, 0))
+                concat_image.save(f"visualization.png")
+                
                 # Compute metrics
                 metrics = self.compute_metrics(pred_image, target_image)
                 metrics_list.append(metrics)
@@ -527,7 +536,7 @@ class ModelEvaluator:
             print("\n" + "="*80)
             print("EVALUATION SUMMARY")
             print("="*80)
-            print(df.groupby('task')[['PSNR', 'SSIM', 'LPIPS']].mean().round(4))
+            print(df.groupby('task')[['PSNR', 'SSIM', 'LPIPS', 'FovVideoVDP']].mean().round(4))
             print("="*80)
         
         return df
