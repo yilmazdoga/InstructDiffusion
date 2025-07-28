@@ -12,6 +12,12 @@ Usage:
     python test_model_evaluation.py --data_path ./data/perceptual_dataset --config configs/instruct_diffusion.yaml --ckpt checkpoints/v1-5-pruned-emaonly-adaption-task.ckpt
 """
 
+# Suppress warnings first, before any imports
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+warnings.filterwarnings("ignore", message=".*mat_struct.*")
+warnings.filterwarnings("ignore", message=".*scipy.io.matlab.*")
+
 import os
 import sys
 import math
@@ -22,10 +28,6 @@ import pandas as pd
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional
 import logging
-import warnings
-
-# Suppress scipy deprecation warnings
-warnings.filterwarnings("ignore", category=DeprecationWarning, module="scipy")
 
 import torch
 import torch.nn as nn
@@ -131,6 +133,12 @@ class FovVideoVDPMetric:
     
     def __init__(self):
         try:
+            # Suppress scipy warnings specifically for pyfvvdp
+            import warnings
+            warnings.filterwarnings("ignore", category=DeprecationWarning)
+            warnings.filterwarnings("ignore", message=".*mat_struct.*")
+            warnings.filterwarnings("ignore", message=".*scipy.io.matlab.*")
+            
             import pyfvvdp
             self.fvvdp = pyfvvdp.fvvdp()
             self.available = True
